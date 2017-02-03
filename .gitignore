@@ -1,5 +1,6 @@
 *.swp
 
 an72emu.layout
+an72emu.depend
 obj/
 bin/
