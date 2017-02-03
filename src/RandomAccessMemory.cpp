@@ -26,24 +26,28 @@ namespace an72
     void
     RandomAccessMemmory::SetByte( uint16_t addressu16, uint8_t valueu8 )
     {
+        assert( addressu16 <= AN72_RAM_LASTADDR && "RandomAccessMemmory::SetByte address out of bounds." );
         _rawData[ addressu16 ] = valueu8;
     }
 
     uint8_t
     RandomAccessMemmory::GetByte( uint16_t addressu16 ) const
     {
+        assert( addressu16 <= AN72_RAM_LASTADDR && "RandomAccessMemmory::GetByte address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
     uint8_t
     RandomAccessMemmory::operator[]( uint16_t addressu16 ) const
     {
+        assert( addressu16 <= AN72_RAM_LASTADDR && "RandomAccessMemmory::operator[] const address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
     uint8_t&
     RandomAccessMemmory::operator[]( uint16_t addressu16 )
     {
+        assert( addressu16 <= AN72_RAM_LASTADDR && "RandomAccessMemmory::operator[] address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
