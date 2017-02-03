@@ -1,6 +1,8 @@
 #ifndef CPU_H
 #define CPU_H
 
+#include "an72.h"
+
 namespace an72
 {
     class Cpu6502
@@ -22,7 +24,7 @@ namespace an72
             void Start();
             void Pause();
             void Step();
-            void PrintRegs();
+            void PrintRegs( const std::ostream& out = std::cout );
     };
 }
 

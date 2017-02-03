@@ -15,6 +15,7 @@ namespace an72
             uint8_t _rawData[ AN72_ROM_SIZE ]; // [0x0000,0xffff]
 
         public:
+
             ReadOnlyMemory();
             ReadOnlyMemory( const ReadOnlyMemory& );
             ~ReadOnlyMemory();

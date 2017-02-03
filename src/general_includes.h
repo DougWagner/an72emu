@@ -4,4 +4,6 @@
 #include <cstdint>
 #include <cstring>
 
+#include <iostream>
+
 #endif // GENERAL_INCLUDES_H_INCLUDED

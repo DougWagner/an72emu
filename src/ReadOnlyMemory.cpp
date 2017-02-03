@@ -1,5 +1,3 @@
-
-
 #include "ReadOnlyMemory.h"
 
 namespace an72
@@ -17,6 +15,12 @@ namespace an72
     ReadOnlyMemory::~ReadOnlyMemory()
     {
         _clear_all_data(); // fill with NO OP's
+    }
+
+    ReadOnlyMemory&
+    ReadOnlyMemory::operator=( const ReadOnlyMemory& other )
+    {
+        std::memcpy( &_rawData, &other._rawData, AN72_ROM_SIZE );
     }
 
     uint8_t

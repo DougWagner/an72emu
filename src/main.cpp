@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "an72.h"
 
 // simple ROM test class to expose _set_byte() as it is protected in an72::ReadOnlyMemory
