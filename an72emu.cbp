@@ -55,6 +55,7 @@
 		<Unit filename="src/cpu.h" />
 		<Unit filename="src/general_includes.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/opcode_values.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
