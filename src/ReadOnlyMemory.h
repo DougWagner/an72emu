@@ -12,7 +12,7 @@ namespace an72
     {
         private:
 
-            uint8_t _rawData[0x10000]; // [0x0000,0xffff]
+            uint8_t _rawData[ AN72_ROM_SIZE ]; // [0x0000,0xffff]
 
         public:
             ReadOnlyMemory();
@@ -23,13 +23,6 @@ namespace an72
 
             uint8_t GetByte( uint16_t addressu16 ) const;
             uint8_t operator[]( uint16_t addressu16 ) const;
-
-            // we don't want the operator[] for anything other than uint8_t and uint16_t
-            template < typename GeneralType1, typename GeneralType2 >
-            GeneralType1 operator[]( GeneralType2 ) const = delete;
-
-            template < typename GeneralType1, typename GeneralType2 >
-            GeneralType1& operator[]( GeneralType2 ) = delete;
 
         protected:
 
