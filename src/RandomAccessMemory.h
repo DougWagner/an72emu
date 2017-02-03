@@ -3,8 +3,8 @@
 
 #include "an72.h"
 
-#define AN72_RAM_SIZE       0x10000
-#define AN72_RAM_LASTADDR   0x0ffff
+#define AN72_RAM_SIZE       0x80
+#define AN72_RAM_LASTADDR   0x7f
 
 namespace an72
 {
