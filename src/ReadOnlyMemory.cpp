@@ -46,7 +46,7 @@ namespace an72
     void
     ReadOnlyMemory::_clear_all_data()
     {
-        _set_all_data( 0xff ); // TODO(dean): replace 0xff with a properly defined NO OP
+        _set_all_data( 0xea ); // TODO(dean): replace 0xea with a properly defined NO OP
     }
 
     void

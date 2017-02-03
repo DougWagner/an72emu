@@ -26,6 +26,25 @@ namespace an72
             void Step();
             void PrintRegs( const std::ostream& out = std::cout );
     };
+
+    /*
+    class CpuRewinder : public Cpu6502
+    {
+        private:
+            std::vector<RegisterState> _registerStates;
+            std::vector<RandomAccessMemmory> _ramStates;
+        public:
+            // ...
+
+            void
+            Step() override
+            {
+                _registerStates.push_back( currentRegister_object );
+                _registerStates.push_back( currentRAM_object );
+                Cpu6502::Step();
+            }
+    };
+    */
 }
 
 #endif
