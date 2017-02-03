@@ -26,14 +26,14 @@ namespace an72
     uint8_t
     ReadOnlyMemory::GetByte( uint16_t addressu16 ) const
     {
-        assert( addressu16 <= AN72_RAM_LASTADDR && "ReadOnlyMemory::GetByte address out of bounds." );
+        assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::GetByte address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
     uint8_t
     ReadOnlyMemory::operator[]( uint16_t addressu16 ) const
     {
-        assert( addressu16 <= AN72_RAM_LASTADDR && "ReadOnlyMemory::operator[] const address out of bounds." );
+        assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::operator[] const address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
@@ -52,7 +52,7 @@ namespace an72
     void
     ReadOnlyMemory::_set_byte( uint16_t addressu16, uint8_t valueu8 )
     {
-        assert( addressu16 <= AN72_RAM_LASTADDR && "ReadOnlyMemory::_set_byte address out of bounds." );
+        assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::_set_byte address out of bounds." );
         _rawData[ addressu16 ] = valueu8;
     }
 }
