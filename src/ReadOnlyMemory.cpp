@@ -2,13 +2,23 @@
 
 namespace an72
 {
-    ReadOnlyMemory::ReadOnlyMemory()
+    ReadOnlyMemory::ReadOnlyMemory( CartSize cartSize )
+    : _cartSize( cartSize )
     {
         _clear_all_data();
     }
 
-    ReadOnlyMemory::ReadOnlyMemory( const ReadOnlyMemory& other )
+    ReadOnlyMemory::ReadOnlyMemory( CartSize cartSize, uint8_t * data )
+    : _cartSize( cartSize )
     {
+        _clear_all_data();
+        std::memcpy( &_rawData, data, (std::size_t)_cartSize );
+    }
+
+    ReadOnlyMemory::ReadOnlyMemory( const ReadOnlyMemory& other )
+    : _cartSize( other._cartSize )
+    {
+        _clear_all_data();
         std::memcpy( &_rawData, &other._rawData, AN72_ROM_SIZE );
     }
 
@@ -20,6 +30,8 @@ namespace an72
     ReadOnlyMemory&
     ReadOnlyMemory::operator=( const ReadOnlyMemory& other )
     {
+        _clear_all_data();
+        _cartSize = other._cartSize;
         std::memcpy( &_rawData, &other._rawData, AN72_ROM_SIZE );
     }
 
@@ -27,6 +39,7 @@ namespace an72
     ReadOnlyMemory::GetByte( uint16_t addressu16 ) const
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::GetByte address out of bounds." );
+        assert( addressu16 <= GetSize() && "ReadOnlyMemory::GetByte address out of bounds." );
         return _rawData[ addressu16 ];
     }
 
@@ -34,7 +47,14 @@ namespace an72
     ReadOnlyMemory::operator[]( uint16_t addressu16 ) const
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::operator[] const address out of bounds." );
+        assert( addressu16 <= GetSize() && "ReadOnlyMemory::operator[] const address out of bounds." );
         return _rawData[ addressu16 ];
+    }
+
+    uint16_t
+    ReadOnlyMemory::GetSize() const
+    {
+        return (uint16_t)_cartSize;
     }
 
     void
@@ -53,6 +73,15 @@ namespace an72
     ReadOnlyMemory::_set_byte( uint16_t addressu16, uint8_t valueu8 )
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::_set_byte address out of bounds." );
+        assert( addressu16 <= GetSize() && "ReadOnlyMemory::_set_byte address out of bounds." );
         _rawData[ addressu16 ] = valueu8;
+    }
+
+    void
+    ReadOnlyMemory::_set_data( CartSize size, uint8_t * data )
+    {
+        _cartSize = size;
+        _clear_all_data();
+        std::memcpy( &_rawData, data, (std::size_t)_cartSize );
     }
 }

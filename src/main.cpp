@@ -1,21 +1,38 @@
 #include "an72.h"
 
-// simple ROM test class to expose _set_byte() as it is protected in an72::ReadOnlyMemory
-class ROMTest : public an72::ReadOnlyMemory
-{
-    public:
-        ROMTest() = default;
-        using ReadOnlyMemory::_set_byte; // force to public
-};
-
 int main()
 {
-    ROMTest rom;
+    std::ios_base::sync_with_stdio( false );
 
-    rom._set_byte( 0x0000, 0x00 );
+    /*std::ifstream file( "", std::ios_base::in | std::ios_base::binary );
 
-    std::cout << int(rom[ 0x0000 ]) << std::endl;
-    std::cout << int(rom[ 0x0001 ]) << std::endl;
+    file.seekg( 0, file.end );
+    int length = file.tellg();
+    file.seekg( 0, file.beg );
+    uint8_t * rawData = new uint8_t[ length ];
+    file.read( (char*)rawData, length );
+    file.close();
+    std::cout << length << std::endl;
+
+    an72::ReadOnlyMemory rom( an72::CartSize::rom4k, rawData );*/
+
+    an72::ReadOnlyMemory rom( an72::CartSize::rom4k );
+
+    std::cout << "0001  ";
+
+    for( std::size_t i = 0; i < rom.GetSize(); ++i )
+    {
+        std::cout << std::hex << std::setfill('0') << std::setw(2) << int(rom[ i ]) << " ";
+        std::size_t n = i + 1;
+        if( n % 4 == 0 )
+        {
+            std::cout << " ";
+        }
+        if( n % 32 == 0 && n < rom.GetSize() )
+        {
+            std::cout << std::endl << std::setfill('0') << std::setw(4) << n << "  ";
+        }
+    }
 
     std::cout << "Hello world!" << std::endl;
     return 0;
