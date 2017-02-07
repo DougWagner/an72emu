@@ -30,10 +30,10 @@ namespace an72
             ~Cpu6502();
 
             void Reset();
-            void Step( ReadOnlyMemory* rom );
-            void Start( ReadOnlyMemory* rom );
+            void Step( ReadOnlyMemory * rom, RandomAccessMemmory * ram );
+            void Start( ReadOnlyMemory * rom, RandomAccessMemmory * ram );
             void Pause();
-            void PrintRegs( const std::ostream& out = std::cout );
+            void PrintRegs( std::ostream& out = std::cout ) const;
 
             RegisterState GetRegisters() const;
     };

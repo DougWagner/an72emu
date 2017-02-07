@@ -33,20 +33,22 @@ namespace an72
     }
 
     void
-    Cpu6502::Step( ReadOnlyMemory* rom )
+    Cpu6502::Step( ReadOnlyMemory * rom, RandomAccessMemmory * ram )
     {
         std::cout << std::hex << "PC: " << int(regs.PC) << " - ";
         uint8_t opcode = rom->GetByte( regs.PC++ );
-        std::cout << std::hex << "opcode " << int(opcode) << " read by cpu" << std::endl;
+        std::cout << std::hex << "opcode " << int(opcode) << " read by cpu";
+        PrintRegs( std::cout );
+        std::cout << std::endl;
         //TODO: get instruction and addressing mode from opcode and execute
     }
 
     void
-    Cpu6502::Start( ReadOnlyMemory* rom )
+    Cpu6502::Start( ReadOnlyMemory * rom, RandomAccessMemmory * ram )
     {
         for ( ;; )
         {
-            Step( rom );
+            Step( rom, ram );
             if (regs.PC == 0xFFFF)
                 break;
         } //TODO: add a system for pausing/halting execution
@@ -59,9 +61,16 @@ namespace an72
     }
 
     void
-    Cpu6502::PrintRegs( const std::ostream& out )
+    Cpu6502::PrintRegs( std::ostream& out ) const
     {
-        // TODO: implement
+        out << "[ PC:[0x" << std::hex << std::setfill('0') << std::setw(4) << int(regs.PC) << "]";
+        out << " P:[0x" << std::hex << std::setfill('0') << std::setw(2) << int(regs.P) << "]";
+        out << " A:[0x" << std::hex << std::setfill('0') << std::setw(2) << int(regs.A) << "]";
+        out << " X:[0x" << std::hex << std::setfill('0') << std::setw(2) << int(regs.X) << "]";
+        out << " Y:[0x" << std::hex << std::setfill('0') << std::setw(2) << int(regs.Y) << "]";
+        out << " S:[0x" << std::hex <<  std::setfill('0') <<std::setw(2) << int(regs.S) << "]";
+        out << " S:[" << std::dec << std::setfill(' ') << std::setw(0) << regs.num_cycles << "] ]";
+
     }
 
     Cpu6502::RegisterState

@@ -18,6 +18,8 @@ int main()
 
     an72::ReadOnlyMemory rom( an72::CartSize::rom4k );
 
+    an72::RandomAccessMemmory ram;
+
     std::cout << "0001  ";
 
     for( std::size_t i = 0; i < rom.GetSize(); ++i )
@@ -38,7 +40,7 @@ int main()
     //cpu.Start( &rom );
     for( std::size_t i = 0; i < rom.GetSize(); ++i )
     {
-        cpu.Step( &rom );
+        cpu.Step( &rom, &ram );
     }
 
     std::cout << "Hello world!" << std::endl;
