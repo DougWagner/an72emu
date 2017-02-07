@@ -21,9 +21,9 @@ namespace an72
             ~Cpu6502();
 
             void Reset();
-            void Start();
+            void Step( ReadOnlyMemory* rom );
+            void Start( ReadOnlyMemory* rom );
             void Pause();
-            void Step();
             void PrintRegs( const std::ostream& out = std::cout );
     };
 

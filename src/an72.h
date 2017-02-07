@@ -3,6 +3,7 @@
 
 #include "general_includes.h"
 
+#include "opcode_values.h"
 #include "ReadOnlyMemory.h"
 #include "cpu.h"
 
