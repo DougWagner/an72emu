@@ -66,7 +66,7 @@ namespace an72
     void
     ReadOnlyMemory::_clear_all_data()
     {
-        _set_all_data( 0xea ); // TODO(dean): replace 0xea with a properly defined NO OP
+        _set_all_data( op_BRK ); // Break opcode
     }
 
     void
