@@ -28,8 +28,9 @@ namespace an72
     void 
     Cpu6502::Step( ReadOnlyMemory* rom )
     {
+        std::cout << std::hex << "PC: " << int(PC) << " - ";
         uint8_t opcode = rom->GetByte( PC++ );
-        std::cout << "opcode " << opcode << " read by cpu" << std::endl;
+        std::cout << std::hex << "opcode " << int(opcode) << " read by cpu" << std::endl;
         //TODO: get instruction and addressing mode from opcode and execute
     }
 
@@ -39,6 +40,8 @@ namespace an72
         for ( ;; )
         {
             Step( rom );
+            if (PC == 0xFFFF)
+                break;
         } //TODO: add a system for pausing/halting execution
     }
 

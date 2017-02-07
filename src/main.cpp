@@ -34,6 +34,13 @@ int main()
         }
     }
 
+    an72::Cpu6502 cpu;
+    //cpu.Start( &rom );
+    for( std::size_t i = 0; i < rom.GetSize(); ++i )
+    {
+        cpu.Step( &rom );
+    }
+
     std::cout << "Hello world!" << std::endl;
     return 0;
 }
