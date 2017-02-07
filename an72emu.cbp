@@ -52,6 +52,7 @@
 		<Unit filename="src/ReadOnlyMemory.cpp" />
 		<Unit filename="src/ReadOnlyMemory.h" />
 		<Unit filename="src/an72.h" />
+		<Unit filename="src/cpu.cpp" />
 		<Unit filename="src/cpu.h" />
 		<Unit filename="src/general_includes.h" />
 		<Unit filename="src/main.cpp" />

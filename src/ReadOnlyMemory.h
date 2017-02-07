@@ -1,6 +1,8 @@
 #ifndef READONLYMEMORY_H_INCLUDED
 #define READONLYMEMORY_H_INCLUDED
 
+class ReadOnlyMemory;
+
 #include "an72.h"
 
 #define AN72_ROM_SIZE       0x10000
