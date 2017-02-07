@@ -1,9 +1,7 @@
 #ifndef READONLYMEMORY_H_INCLUDED
 #define READONLYMEMORY_H_INCLUDED
 
-class ReadOnlyMemory;
-
-#include "an72.h"
+#include "general_includes.h"
 
 #define AN72_ROM_SIZE       0x10000
 #define AN72_ROM_LASTADDR   0x0ffff

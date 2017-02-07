@@ -1,5 +1,7 @@
 #include "ReadOnlyMemory.h"
 
+#include "an72.h"
+
 namespace an72
 {
     ReadOnlyMemory::ReadOnlyMemory( CartSize cartSize )

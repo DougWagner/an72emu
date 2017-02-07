@@ -1,7 +1,7 @@
 #ifndef RANDOMACCESSMEMORY_H_INCLUDED
 #define RANDOMACCESSMEMORY_H_INCLUDED
 
-#include "an72.h"
+#include "general_includes.h"
 
 #define AN72_RAM_SIZE       0x80
 #define AN72_RAM_LASTADDR   0x7f
