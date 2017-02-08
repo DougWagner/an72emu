@@ -4,6 +4,8 @@ int main()
 {
     std::ios_base::sync_with_stdio( false );
 
+    std::cout << "Hello World!" << std::endl;
+
     /*std::ifstream file( "", std::ios_base::in | std::ios_base::binary );
 
     file.seekg( 0, file.end );
@@ -27,6 +29,6 @@ int main()
         cpu.Step( &rom, &ram );
     }
 
-    std::cout << "Hello world!" << std::endl;
+    std::cout << "Goodbye world!" << std::endl;
     return 0;
 }
