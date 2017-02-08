@@ -5,4 +5,4 @@
 #g++ -std=c++11 -c src/RandomAccessMemory.cpp -o src/RandomAccessMemory.o -Wall
 #g++ -std=c++11 -c src/cpu.cpp -o src/cpu.o -Wall
 #g++ -std=c++11 -c src/main.cpp -o src/main.o -Wall
-g++ -std=c++11 -o an72emu src/main.cpp src/cpu.cpp src/ReadOnlyMemory.cpp src/RandomAccessMemory.cpp -Wall
+g++ -std=c++11 -o an72emu src/main.cpp src/cpu.cpp src/ReadOnlyMemory.cpp src/RandomAccessMemory.cpp src/Opcode.cpp -Wall
