@@ -2,7 +2,7 @@
 
 namespace an72
 {
-    Cpu6502::RegisterState::RegisterState()
+    RegisterState::RegisterState()
     : num_cycles( 0ull ), PC( 0x0000 ), A( 0x00 ), X( 0x00 ), Y( 0x00 ), S( 0xFF ), P( 0x00 )
     {
 
@@ -36,8 +36,10 @@ namespace an72
     Cpu6502::Step( ReadOnlyMemory * rom, RandomAccessMemmory * ram )
     {
         std::cout << std::hex << "PC: " << int(regs.PC) << " - ";
-        uint8_t opcode = rom->GetByte( regs.PC++ );
-        std::cout << std::hex << "opcode " << int(opcode) << " read by cpu";
+        uint8_t opcode_num = rom->GetByte( regs.PC++ );
+        Opcode opcode(&regs, rom, ram, opcode_num);
+        opcode.exec();
+        //std::cout << std::hex << "opcode " << int(opcode) << " read by cpu";
         PrintRegs( std::cout );
         std::cout << std::endl;
         //TODO: get instruction and addressing mode from opcode and execute
@@ -73,7 +75,7 @@ namespace an72
 
     }
 
-    Cpu6502::RegisterState
+    RegisterState
     Cpu6502::GetRegisters() const
     {
         return regs;

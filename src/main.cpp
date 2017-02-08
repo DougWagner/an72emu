@@ -22,6 +22,16 @@ int main()
 
     an72::RandomAccessMemmory ram;
 
+    /* to test all opcodes, make ReadOnlyMemory::_set_byte public and uncomment the loop.
+
+       the loop will store all opcodes 0-255 (including illegal opcodes)
+       into ROM addresses 0xf00 - 0xfff so cpu step can test the opcode class
+    for (std::size_t i = 0; i <= 0xff; ++i) 
+    {
+        rom._set_byte(0xf00 + (uint16_t)i, (uint8_t)i);
+    }
+    */
+
     an72::Cpu6502 cpu;
     //cpu.Start( &rom );
     for( std::size_t i = 0; i < rom.GetSize(); ++i )

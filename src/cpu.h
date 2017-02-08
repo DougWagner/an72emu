@@ -1,27 +1,34 @@
 #ifndef CPU_H
 #define CPU_H
 
+/* forward declarations of RegisterState and Cpu6502 before includes.
+   for some reason project won't compile without these... fix later */
+namespace an72
+{
+    struct RegisterState;
+    class Cpu6502;
+}
+
 #include "general_includes.h"
 #include "ReadOnlyMemory.h"
 #include "RandomAccessMemory.h"
+#include "Opcode.h"
 
 namespace an72
 {
+    struct RegisterState
+    {
+        uint64_t num_cycles; // larger types first for better packing
+        uint16_t PC;
+        uint8_t A, X, Y, S, P;
+
+        RegisterState();
+        RegisterState( const RegisterState& other ) = default;
+        RegisterState& operator=( const RegisterState& other ) = default;
+    };
+    
     class Cpu6502
     {
-        public:
-
-            struct RegisterState
-            {
-                uint64_t num_cycles; // larger types first for better packing
-                uint16_t PC;
-                uint8_t A, X, Y, S, P;
-
-                RegisterState();
-                RegisterState( const RegisterState& other ) = default;
-                RegisterState& operator=( const RegisterState& other ) = default;
-            };
-
         private:
             // processor registers
             RegisterState regs;
