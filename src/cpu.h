@@ -1,7 +1,9 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include "an72.h"
+#include "general_includes.h"
+#include "ReadOnlyMemory.h"
+#include "RandomAccessMemory.h"
 
 namespace an72
 {

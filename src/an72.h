@@ -7,7 +7,7 @@
 #include "ReadOnlyMemory.h"
 #include "RandomAccessMemory.h"
 #include "cpu.h"
-
+#include "Opcode.h"
 #include "carts.h"
 
 namespace an72
