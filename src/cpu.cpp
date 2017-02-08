@@ -3,7 +3,7 @@
 namespace an72
 {
     Cpu6502::RegisterState::RegisterState()
-    : num_cycles( 0ull ), PC( 0x0000 ), P( 0x00 ), A( 0x00 ), X( 0x00 ), Y( 0x00 ), S( 0xFF )
+    : num_cycles( 0ull ), PC( 0x0000 ), A( 0x00 ), X( 0x00 ), Y( 0x00 ), S( 0xFF ), P( 0x00 )
     {
 
     }

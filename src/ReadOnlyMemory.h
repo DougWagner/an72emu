@@ -33,7 +33,7 @@ namespace an72
             ReadOnlyMemory( CartSize cartSize );
             ReadOnlyMemory( CartSize cartSize, uint8_t * data );
             ReadOnlyMemory( const ReadOnlyMemory& );
-            ~ReadOnlyMemory();
+            virtual ~ReadOnlyMemory();
 
             ReadOnlyMemory& operator=( const ReadOnlyMemory& );
 
@@ -42,11 +42,16 @@ namespace an72
 
             uint16_t GetSize() const;
 
+            void Print( std::ostream& out = std::cout ) const;
+
+            virtual uint8_t AccesMappedByte( uint16_t addressu16 ) const;
+
         protected:
 
             void _set_all_data( uint8_t valueu8 );
             void _clear_all_data();
             void _set_byte( uint16_t addressu16, uint8_t valueu8 );
+            uint8_t _get_raw_byte( uint16_t addressu16 ) const;
             void _set_data( CartSize size, uint8_t * data );
     };
 }

@@ -14,27 +14,11 @@ int main()
     file.close();
     std::cout << length << std::endl;
 
-    an72::ReadOnlyMemory rom( an72::CartSize::rom4k, rawData );*/
+    an72::Cart::ROM_4k rom( rawData );*/
 
     an72::ReadOnlyMemory rom( an72::CartSize::rom4k );
 
     an72::RandomAccessMemmory ram;
-
-    std::cout << "0001  ";
-
-    for( std::size_t i = 0; i < rom.GetSize(); ++i )
-    {
-        std::cout << std::hex << std::setfill('0') << std::setw(2) << int(rom[ i ]) << " ";
-        std::size_t n = i + 1;
-        if( n % 4 == 0 )
-        {
-            std::cout << " ";
-        }
-        if( n % 32 == 0 && n < rom.GetSize() )
-        {
-            std::cout << std::endl << std::setfill('0') << std::setw(4) << n << "  ";
-        }
-    }
 
     an72::Cpu6502 cpu;
     //cpu.Start( &rom );

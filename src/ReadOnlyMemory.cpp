@@ -41,22 +41,54 @@ namespace an72
     ReadOnlyMemory::GetByte( uint16_t addressu16 ) const
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::GetByte address out of bounds." );
-        assert( addressu16 <= GetSize() && "ReadOnlyMemory::GetByte address out of bounds." );
-        return _rawData[ addressu16 ];
+        return AccesMappedByte( addressu16 );
     }
 
     uint8_t
     ReadOnlyMemory::operator[]( uint16_t addressu16 ) const
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::operator[] const address out of bounds." );
-        assert( addressu16 <= GetSize() && "ReadOnlyMemory::operator[] const address out of bounds." );
-        return _rawData[ addressu16 ];
+        return AccesMappedByte( addressu16 );
     }
 
     uint16_t
     ReadOnlyMemory::GetSize() const
     {
         return (uint16_t)_cartSize;
+    }
+
+    void
+    ReadOnlyMemory::Print( std::ostream& out ) const
+    {
+        const bool addressPrepend = false;
+        if( addressPrepend )
+        {
+            out << "0000  ";
+        }
+
+        for( std::size_t i = 0; i < (uint16_t)_cartSize; ++i )
+        {
+            out << std::hex << std::setfill('0') << std::setw(2) << int(_get_raw_byte( i )) << " ";
+            std::size_t n = i + 1;
+            if( n % 4 == 0 )
+            {
+                out << " ";
+            }
+            if( n % 32 == 0 && n < (uint16_t)_cartSize )
+            {
+                out << std::endl;
+                if( addressPrepend )
+                {
+                    out << std::setfill('0') << std::setw(4) << i << "  ";
+                }
+            }
+        }
+    }
+
+    uint8_t
+    ReadOnlyMemory::AccesMappedByte( uint16_t addressu16 ) const
+    {
+        return _get_raw_byte( addressu16 );
     }
 
     void
@@ -75,8 +107,13 @@ namespace an72
     ReadOnlyMemory::_set_byte( uint16_t addressu16, uint8_t valueu8 )
     {
         assert( addressu16 <= AN72_ROM_LASTADDR && "ReadOnlyMemory::_set_byte address out of bounds." );
-        assert( addressu16 <= GetSize() && "ReadOnlyMemory::_set_byte address out of bounds." );
         _rawData[ addressu16 ] = valueu8;
+    }
+
+    uint8_t
+    ReadOnlyMemory::_get_raw_byte( uint16_t addressu16 ) const
+    {
+        return _rawData[ addressu16 ];
     }
 
     void
