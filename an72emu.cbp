@@ -47,6 +47,8 @@
 			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="src/Opcode.cpp" />
+		<Unit filename="src/Opcode.h" />
 		<Unit filename="src/RandomAccessMemory.cpp" />
 		<Unit filename="src/RandomAccessMemory.h" />
 		<Unit filename="src/ReadOnlyMemory.cpp" />
