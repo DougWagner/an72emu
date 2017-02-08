@@ -5,7 +5,7 @@
 
 namespace an72
 {
-    enum op_addr_mode : uint8_t
+    enum op_addr_mode
     {
         none,
         immediate,
@@ -16,35 +16,35 @@ namespace an72
         absolute_y,
         indirect_x,
         indirect_y
-    }
+    };
 
-    enum op_instr : uint8_t
+    enum op_instr
     {
-        adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl, brk, bvc, bvs, clc,
-        cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp, 
-        jsr, lda, ldx, ldy, lsr, nop, ora, pha, php, pla, plp, rol, ror, rti, 
-        rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya
-    }
+        adc_i, and_i, asl_i, bcc_i, bcs_i, beq_i, bit_i, bmi_i, bne_i, bpl_i, brk_i, bvc_i, bvs_i, clc_i,
+        cld_i, cli_i, clv_i, cmp_i, cpx_i, cpy_i, dec_i, dex_i, dey_i, eor_i, inc_i, inx_i, iny_i, jmp_i, 
+        jsr_i, lda_i, ldx_i, ldy_i, lsr_i, nop_i, ora_i, pha_i, php_i, pla_i, plp_i, rol_i, ror_i, rti_i, 
+        rts_i, sbc_i, sec_i, sed_i, sei_i, sta_i, stx_i, sty_i, tax_i, tay_i, tsx_i, txa_i, txs_i, tya_i
+    };
 
     class Opcode
     {
         private:
-            Cpu6502::RegisterState reg;
-            ReadOnlyMemory rom;
-            RandomAccessMemmory ram;
+            Cpu6502::RegisterState* reg;
+            ReadOnlyMemory* rom;
+            RandomAccessMemmory* ram;
             uint8_t op, addr, instr; // opcode, addressing mode, instruction
 
         public:
             Opcode() = delete; // i dont know if this is correct, but we dont want a default constructor
-            Opcode( Cpu6502::RegisterState REG, ReadOnlyMemory ROM, RandomAccessMemory RAM, uint8_t opcode );
-            Opcode( const Opcode& );
+            Opcode( Cpu6502::RegisterState* REG, ReadOnlyMemory* ROM, RandomAccessMemmory* RAM, uint8_t opcode );
+            Opcode( const Opcode& other );
             ~Opcode();
 
             Opcode& operator=( const Opcode& );
 
             uint64_t exec(); // returns number of cycles needed for execution
 
-    }
+    };
 }
 
 #endif

@@ -2,7 +2,7 @@
 
 namespace an72
 {
-    Opcode::Opcode( Cpu6502::RegisterState REG, ReadOnlyMemory ROM, RandomAccessMemory RAM, uint8_t opcode )
+    Opcode::Opcode( Cpu6502::RegisterState* REG, ReadOnlyMemory* ROM, RandomAccessMemmory* RAM, uint8_t opcode )
     {
         reg = REG;
         rom = ROM;
