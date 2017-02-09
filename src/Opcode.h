@@ -37,56 +37,18 @@ namespace an72
         illeg
     };
 
-
     class Opcode
     {
         private:
-            constexpr static const addrm addrm_map[256] = {
-        /*     |   0        |   1         |   2        |   3        |   4          |   5          |   6           |   7       |   8       |   9         |   A        |   B        |   C         |   D         |   E         |   F        |*/
-        /*  0 */addrm::imp,  addrm::ind_x, addrm::none, addrm::none, addrm::none,   addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::acc,  addrm::none, addrm::none,  addrm::abs,   addrm::abs,   addrm::none,
-        /*  1 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
-        /*  2 */addrm::abs,  addrm::ind_x, addrm::none, addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::acc,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  3 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
-        /*  4 */addrm::imp,  addrm::ind_x, addrm::none, addrm::none, addrm::none,   addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::acc,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  5 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
-        /*  6 */addrm::imp,  addrm::ind_x, addrm::none, addrm::none, addrm::none,   addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::acc,  addrm::none, addrm::ind,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  7 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
-        /*  8 */addrm::none, addrm::ind_x, addrm::none, addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::none,  addrm::imp,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  9 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::z_p_x,  addrm::z_p_x,  addrm::z_p_y,  addrm::none, addrm::imp, addrm::abs_y, addrm::imp,  addrm::none, addrm::none,  addrm::abs_x, addrm::none,  addrm::none,
-        /*  A */addrm::imm,  addrm::ind_x, addrm::imm,  addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::imp,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  B */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::z_p_x,  addrm::z_p_x,  addrm::z_p_y,  addrm::none, addrm::imp, addrm::abs_y, addrm::imp,  addrm::none, addrm::abs_x, addrm::abs_x, addrm::abs_y, addrm::none,
-        /*  C */addrm::imm,  addrm::ind_x, addrm::none, addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::imp,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  D */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
-        /*  E */addrm::imm,  addrm::ind_x, addrm::none, addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::imp,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
-        /*  F */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none
-            };
-
-            constexpr static const instr instr_map[256] = {
-        /*     |   0         |   1         |   2         |   3         |   4         |   5         |   6         |   7         |   8         |   9         |   A         |   B         |   C         |   D         |   E         |   F         |*/
-        /*  0 */instr::brk_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg, instr::php_i, instr::ora_i, instr::asl_i, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg,
-        /*  1 */instr::bpl_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg, instr::clc_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg,
-        /*  2 */instr::jsr_i, instr::and_i, instr::illeg, instr::illeg, instr::bit_i, instr::and_i, instr::rol_i, instr::illeg, instr::plp_i, instr::and_i, instr::rol_i, instr::illeg, instr::bit_i, instr::and_i, instr::rol_i, instr::illeg,
-        /*  3 */instr::bmi_i, instr::and_i, instr::illeg, instr::illeg, instr::illeg, instr::and_i, instr::rol_i, instr::illeg, instr::sec_i, instr::and_i, instr::illeg, instr::illeg, instr::illeg, instr::and_i, instr::rol_i, instr::illeg,
-        /*  4 */instr::rti_i, instr::eor_i, instr::illeg, instr::illeg, instr::illeg, instr::eor_i, instr::lsr_i, instr::illeg, instr::pha_i, instr::eor_i, instr::lsr_i, instr::illeg, instr::jmp_i, instr::eor_i, instr::lsr_i, instr::illeg,
-        /*  5 */instr::bvc_i, instr::eor_i, instr::illeg, instr::illeg, instr::illeg, instr::eor_i, instr::lsr_i, instr::illeg, instr::cli_i, instr::eor_i, instr::illeg, instr::illeg, instr::illeg, instr::eor_i, instr::lsr_i, instr::illeg,
-        /*  6 */instr::rts_i, instr::adc_i, instr::illeg, instr::illeg, instr::illeg, instr::adc_i, instr::ror_i, instr::illeg, instr::pla_i, instr::adc_i, instr::ror_i, instr::illeg, instr::jmp_i, instr::adc_i, instr::ror_i, instr::illeg,
-        /*  7 */instr::bvs_i, instr::adc_i, instr::illeg, instr::illeg, instr::illeg, instr::adc_i, instr::ror_i, instr::illeg, instr::sei_i, instr::adc_i, instr::illeg, instr::illeg, instr::illeg, instr::adc_i, instr::ror_i, instr::illeg,
-        /*  8 */instr::illeg, instr::sta_i, instr::illeg, instr::illeg, instr::sty_i, instr::sta_i, instr::stx_i, instr::illeg, instr::dey_i, instr::illeg, instr::txa_i, instr::illeg, instr::sty_i, instr::sta_i, instr::stx_i, instr::illeg,
-        /*  9 */instr::bcc_i, instr::sta_i, instr::illeg, instr::illeg, instr::sty_i, instr::sta_i, instr::stx_i, instr::illeg, instr::tya_i, instr::sta_i, instr::txs_i, instr::illeg, instr::illeg, instr::sta_i, instr::illeg, instr::illeg,
-        /*  A */instr::ldy_i, instr::lda_i, instr::ldx_i, instr::illeg, instr::ldy_i, instr::lda_i, instr::ldx_i, instr::illeg, instr::tay_i, instr::lda_i, instr::tax_i, instr::illeg, instr::ldy_i, instr::lda_i, instr::ldx_i, instr::illeg,
-        /*  B */instr::bcs_i, instr::lda_i, instr::illeg, instr::illeg, instr::ldy_i, instr::lda_i, instr::ldx_i, instr::illeg, instr::clv_i, instr::lda_i, instr::tsx_i, instr::illeg, instr::ldy_i, instr::lda_i, instr::ldx_i, instr::illeg,
-        /*  C */instr::cpy_i, instr::cmp_i, instr::illeg, instr::illeg, instr::cpy_i, instr::cmp_i, instr::dec_i, instr::illeg, instr::iny_i, instr::cmp_i, instr::dex_i, instr::illeg, instr::cpy_i, instr::cmp_i, instr::dec_i, instr::illeg,
-        /*  D */instr::bne_i, instr::cmp_i, instr::illeg, instr::illeg, instr::illeg, instr::cmp_i, instr::dec_i, instr::illeg, instr::cld_i, instr::cmp_i, instr::illeg, instr::illeg, instr::illeg, instr::cmp_i, instr::dec_i, instr::illeg,
-        /*  E */instr::cpx_i, instr::sbc_i, instr::illeg, instr::illeg, instr::cpx_i, instr::sbc_i, instr::inc_i, instr::illeg, instr::inx_i, instr::sbc_i, instr::nop_i, instr::illeg, instr::cpx_i, instr::sbc_i, instr::inc_i, instr::illeg,
-        /*  F */instr::beq_i, instr::sbc_i, instr::illeg, instr::illeg, instr::illeg, instr::sbc_i, instr::inc_i, instr::illeg, instr::sed_i, instr::sbc_i, instr::illeg, instr::illeg, instr::illeg, instr::sbc_i, instr::inc_i, instr::illeg
-            };
-
             RegisterState* reg;
             ReadOnlyMemory* rom;
             RandomAccessMemmory* ram;
             uint8_t op; // opcode number
             //instr instruction;
             //addrm a_mode;
+            static addrm addrm_map[256];
+            static instr instr_map[256];
+            static uint8_t cycle_map[256];
 
         public:
             Opcode() = delete;
@@ -171,7 +133,6 @@ namespace an72
             void txa_exec();
             void txs_exec();
             void tya_exec();
-            
     };
 }
 
