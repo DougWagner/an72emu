@@ -37,7 +37,11 @@ namespace an72
         illeg
     };
 
-    const addrm addrm_map[256] = {
+
+    class Opcode
+    {
+        private:
+            constexpr static const addrm addrm_map[256] = {
         /*     |   0        |   1         |   2        |   3        |   4          |   5          |   6           |   7       |   8       |   9         |   A        |   B        |   C         |   D         |   E         |   F        |*/
         /*  0 */addrm::imp,  addrm::ind_x, addrm::none, addrm::none, addrm::none,   addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::acc,  addrm::none, addrm::none,  addrm::abs,   addrm::abs,   addrm::none,
         /*  1 */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
@@ -55,9 +59,9 @@ namespace an72
         /*  D */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none,
         /*  E */addrm::imm,  addrm::ind_x, addrm::none, addrm::none, addrm::z_page, addrm::z_page, addrm::z_page, addrm::none, addrm::imp, addrm::imm,   addrm::imp,  addrm::none, addrm::abs,   addrm::abs,   addrm::abs,   addrm::none,
         /*  F */addrm::rel,  addrm::ind_y, addrm::none, addrm::none, addrm::none,   addrm::z_p_x,  addrm::z_p_x,  addrm::none, addrm::imp, addrm::abs_y, addrm::none, addrm::none, addrm::none,  addrm::abs_x, addrm::abs_x, addrm::none
-    };
+            };
 
-    const instr instr_map[256] = {
+            constexpr static const instr instr_map[256] = {
         /*     |   0         |   1         |   2         |   3         |   4         |   5         |   6         |   7         |   8         |   9         |   A         |   B         |   C         |   D         |   E         |   F         |*/
         /*  0 */instr::brk_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg, instr::php_i, instr::ora_i, instr::asl_i, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg,
         /*  1 */instr::bpl_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg, instr::clc_i, instr::ora_i, instr::illeg, instr::illeg, instr::illeg, instr::ora_i, instr::asl_i, instr::illeg,
@@ -75,17 +79,14 @@ namespace an72
         /*  D */instr::bne_i, instr::cmp_i, instr::illeg, instr::illeg, instr::illeg, instr::cmp_i, instr::dec_i, instr::illeg, instr::cld_i, instr::cmp_i, instr::illeg, instr::illeg, instr::illeg, instr::cmp_i, instr::dec_i, instr::illeg,
         /*  E */instr::cpx_i, instr::sbc_i, instr::illeg, instr::illeg, instr::cpx_i, instr::sbc_i, instr::inc_i, instr::illeg, instr::inx_i, instr::sbc_i, instr::nop_i, instr::illeg, instr::cpx_i, instr::sbc_i, instr::inc_i, instr::illeg,
         /*  F */instr::beq_i, instr::sbc_i, instr::illeg, instr::illeg, instr::illeg, instr::sbc_i, instr::inc_i, instr::illeg, instr::sed_i, instr::sbc_i, instr::illeg, instr::illeg, instr::illeg, instr::sbc_i, instr::inc_i, instr::illeg
-    };
+            };
 
-    class Opcode
-    {
-        private:
             RegisterState* reg;
             ReadOnlyMemory* rom;
             RandomAccessMemmory* ram;
-            uint8_t op; // opcode
-            instr instruction;
-            addrm a_mode;
+            uint8_t op; // opcode number
+            //instr instruction;
+            //addrm a_mode;
 
         public:
             Opcode() = delete;
@@ -170,6 +171,7 @@ namespace an72
             void txa_exec();
             void txs_exec();
             void tya_exec();
+            
     };
 }
 

@@ -8,9 +8,8 @@ namespace an72
         rom = ROM;
         ram = RAM;
         op = opcode;
-        // TODO: get addressing mode and instruction from opcode
-        a_mode = addrm_map[op];
-        instruction = instr_map[op];
+        //a_mode = addrm_map[op];
+        //instruction = instr_map[op];
     }
 
     Opcode::Opcode( const Opcode& other )
@@ -31,7 +30,7 @@ namespace an72
     uint64_t Opcode::exec() // this function hurts...
     {
         std::cout << std::hex << "opcode " << int(op) << " - addr mode: ";
-        switch (a_mode)
+        switch (addrm_map[op])
         {
             case addrm::acc:
                 accumulator();
@@ -78,7 +77,7 @@ namespace an72
                 break;
         }
         std::cout << " - instruction: ";
-        switch (instruction) 
+        switch (instr_map[op]) 
         {
             case instr::adc_i: 
                 adc_exec();
